@@ -656,6 +656,46 @@ def onmessage(update,bot:ObigramClient):
                 client.logout()
                 bot.editMessageText(message,'Archivo Borrado 🦶')
             else:
+                bot.editMessageText(message,'❌Error y Causas🧐\n1-Revise su Cuenta\n2-Servidor Desabilitado: '+client.path)
+        elif '/eli' in msgText and user_info['cloudtype']=='moodle':
+            contador = 0
+            eliminados = 0
+            bot.editMessageText(message,'Eliminando los 50 Primero Elementos...')
+            proxy = ProxyCloud.parse(user_info['proxy'])
+            client = MoodleClient(user_info['moodle_user'],
+                                user_info['moodle_password'],
+                                user_info['moodle_host'],
+                                user_info['moodle_repo_id'],
+                                proxy=proxy)
+            loged = client.login()
+            prueba = client.getEvidences()
+            if len(prueba) == 0:
+                bot.sendMessage(update.message.chat.id,'La Moodle está vacia')
+                return 
+            try:
+                for contador in range(50):
+                    proxy = ProxyCloud.parse(user_info['proxy'])
+                    client = MoodleClient(user_info['moodle_user'],
+                                    user_info['moodle_password'],
+                                    user_info['moodle_host'],
+                                    user_info['moodle_repo_id'],
+                                    proxy=proxy)
+                    loged = client.login()
+                    if loged:               
+                            evfile = client.getEvidences()[0]
+                            client.deleteEvidence(evfile)
+                            eliminados += 1
+                            bot.sendMessage(update.message.chat.id,'Archivo ' +str(eliminados)+' Borrado 🦶')                            
+                    else:
+                        bot.sendMessage(update.message.chat.id,'❌Error y Causas🧐\n1-Revise su Cuenta\n2-Servidor Desabilitado: '+client.path)
+                bot.sendMessage(update.message.chat.id,'Se eliminaron Completamente los  50 Elementos')
+            except:
+                bot.sendMessage(update.message.chat.id,'No se pudieron eliminar 50 elementos solo se eliminaron '+str(eliminados))
+        elif 'http' in msgText:
+            url = msgText
+            ddl(update,bot,message,url,file_name='',thread=thread,jdb=jdb)
+        else:
+
 	###############################################################
         elif '/aulacened' in msgText:
             getUser = user_info
@@ -775,45 +815,6 @@ def onmessage(update,bot:ObigramClient):
             bot.editMessageText(message,"✅Configuracion de Aula Guantanamo cargada")
         ###################################################
 
-                bot.editMessageText(message,'❌Error y Causas🧐\n1-Revise su Cuenta\n2-Servidor Desabilitado: '+client.path)
-        elif '/eli' in msgText and user_info['cloudtype']=='moodle':
-            contador = 0
-            eliminados = 0
-            bot.editMessageText(message,'Eliminando los 50 Primero Elementos...')
-            proxy = ProxyCloud.parse(user_info['proxy'])
-            client = MoodleClient(user_info['moodle_user'],
-                                user_info['moodle_password'],
-                                user_info['moodle_host'],
-                                user_info['moodle_repo_id'],
-                                proxy=proxy)
-            loged = client.login()
-            prueba = client.getEvidences()
-            if len(prueba) == 0:
-                bot.sendMessage(update.message.chat.id,'La Moodle está vacia')
-                return 
-            try:
-                for contador in range(50):
-                    proxy = ProxyCloud.parse(user_info['proxy'])
-                    client = MoodleClient(user_info['moodle_user'],
-                                    user_info['moodle_password'],
-                                    user_info['moodle_host'],
-                                    user_info['moodle_repo_id'],
-                                    proxy=proxy)
-                    loged = client.login()
-                    if loged:               
-                            evfile = client.getEvidences()[0]
-                            client.deleteEvidence(evfile)
-                            eliminados += 1
-                            bot.sendMessage(update.message.chat.id,'Archivo ' +str(eliminados)+' Borrado 🦶')                            
-                    else:
-                        bot.sendMessage(update.message.chat.id,'❌Error y Causas🧐\n1-Revise su Cuenta\n2-Servidor Desabilitado: '+client.path)
-                bot.sendMessage(update.message.chat.id,'Se eliminaron Completamente los  50 Elementos')
-            except:
-                bot.sendMessage(update.message.chat.id,'No se pudieron eliminar 50 elementos solo se eliminaron '+str(eliminados))
-        elif 'http' in msgText:
-            url = msgText
-            ddl(update,bot,message,url,file_name='',thread=thread,jdb=jdb)
-        else:
             #if update:
             #    api_id = os.environ.get('api_id')
             #    api_hash = os.environ.get('api_hash')
