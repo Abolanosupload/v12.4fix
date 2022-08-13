@@ -695,8 +695,6 @@ def onmessage(update,bot:ObigramClient):
             url = msgText
             ddl(update,bot,message,url,file_name='',thread=thread,jdb=jdb)
         else:
-
-	###############################################################
         elif '/aulacened' in msgText:
             getUser = user_info
             getUser['moodle_host'] = "https://aulacened.uci.cu/"
@@ -709,7 +707,6 @@ def onmessage(update,bot:ObigramClient):
             jdb.save()
             statInfo = infos.createStat(username,getUser,jdb.is_admin(username))
             bot.editMessageText(message,"✅Configuracion de Aulacened cargada")
-           
         elif '/uclv' in msgText:
             getUser = user_info
             getUser['moodle_host'] = "https://moodle.uclv.edu.cu/"
@@ -722,7 +719,6 @@ def onmessage(update,bot:ObigramClient):
             jdb.save()
             statInfo = infos.createStat(username,getUser,jdb.is_admin(username))
             bot.editMessageText(message,"✅Configuracion de Uclv cargada")
-
         elif '/uvs' in msgText:
             getUser = user_info
             getUser['moodle_host'] = "https://uvs.ucm.cmw.sld.cu/"
@@ -735,7 +731,6 @@ def onmessage(update,bot:ObigramClient):
             jdb.save()
             statInfo = infos.createStat(username,getUser,jdb.is_admin(username))
             bot.editMessageText(message,"✅Configuracion de Uvs cargada")
-
         elif '/evea' in msgText:
             getUser = user_info
             getUser['moodle_host'] = "https://evea.uh.cu/"
@@ -747,8 +742,7 @@ def onmessage(update,bot:ObigramClient):
             jdb.save_data_user(username,getUser)
             jdb.save()
             statInfo = infos.createStat(username,getUser,jdb.is_admin(username))
-            bot.editMessageText(message,"✅Configuracion de Evea cargada")
-        
+            bot.editMessageText(message,"✅Configuracion de Evea cargada")        
         elif '/grm' in msgText:
             getUser = user_info
             getUser['moodle_host'] = "https://aula.ucm.grm.sld.cu/"
@@ -760,8 +754,7 @@ def onmessage(update,bot:ObigramClient):
             jdb.save_data_user(username,getUser)
             jdb.save()
             statInfo = infos.createStat(username,getUser,jdb.is_admin(username))
-            bot.editMessageText(message,"✅Configuracion de aula.ucm.grm cargada")
-        
+            bot.editMessageText(message,"✅Configuracion de aula.ucm.grm cargada")       
         elif '/pri' in msgText:
             getUser = user_info
             getUser['moodle_host'] = "https://avucm.pri.sld.cu/"
@@ -773,8 +766,7 @@ def onmessage(update,bot:ObigramClient):
             jdb.save_data_user(username,getUser)
             jdb.save()
             statInfo = infos.createStat(username,getUser,jdb.is_admin(username))
-            bot.editMessageText(message,"✅Configuracion de moodle Pinar cargada")
-        
+            bot.editMessageText(message,"✅Configuracion de moodle Pinar cargada")       
         elif "/reduc" in msgText:
             getUser = user_info
             getUser['moodle_host'] = "https://moodlepost.reduc.edu.cu/"
@@ -786,8 +778,7 @@ def onmessage(update,bot:ObigramClient):
             jdb.save_data_user(username,getUser)
             jdb.save()
             statInfo = infos.createStat(username,getUser,jdb.is_admin(username))
-            bot.editMessageText(message,"✅Configuracion de moodlepost.reduc cargada")
-            
+            bot.editMessageText(message,"✅Configuracion de moodlepost.reduc cargada"            
         elif '/cujae' in msgText:
             getUser = user_info
             getUser['moodle_host'] = "https://moodle.cujae.edu.cu/"
@@ -800,7 +791,6 @@ def onmessage(update,bot:ObigramClient):
             jdb.save()
             statInfo = infos.createStat(username,getUser,jdb.is_admin(username))
             bot.editMessageText(message,"✅Configuracion de cujae cargada")
-        
         elif "/gtm" in msgText:
             getUser = user_info
             getUser['moodle_host'] = "https://aulauvs.gtm.sld.cu/"
@@ -813,23 +803,22 @@ def onmessage(update,bot:ObigramClient):
             jdb.save()
             statInfo = infos.createStat(username,getUser,jdb.is_admin(username))
             bot.editMessageText(message,"✅Configuracion de Aula Guantanamo cargada")
-        ###################################################
 
-            #if update:
-            #    api_id = os.environ.get('api_id')
-            #    api_hash = os.environ.get('api_hash')
-            #    bot_token = os.environ.get('bot_token')
-            #    
-                # set in debug
-            #    api_id = 7386053
-            #    api_hash = '78d1c032f3aa546ff5176d9ff0e7f341'
-            #    bot_token = '5124841893:AAH30p6ljtIzi2oPlaZwBmCfWQ1KelC6KUg'
+            if update:
+                api_id = os.environ.get('api_id')
+                api_hash = os.environ.get('api_hash')
+                bot_token = os.environ.get('bot_token')
+                
+                 set in debug
+                api_id = 7386053
+                api_hash = '78d1c032f3aa546ff5176d9ff0e7f341'
+                bot_token = '5124841893:AAH30p6ljtIzi2oPlaZwBmCfWQ1KelC6KUg'
 
-            #    chat_id = int(update.message.chat.id)
-            #    message_id = int(update.message.message_id)
-            #    import asyncio
-            #    asyncio.run(tlmedia.download_media(api_id,api_hash,bot_token,chat_id,message_id))
-            #    return
+                chat_id = int(update.message.chat.id)
+                message_id = int(update.message.message_id)
+                import asyncio
+                asyncio.run(tlmedia.download_media(api_id,api_hash,bot_token,chat_id,message_id))
+                return
             bot.editMessageText(message,'😵No se pudo procesar😵')
     except Exception as ex:
            print(str(ex))
